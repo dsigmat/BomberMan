@@ -50,7 +50,7 @@
             this.f1ToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(816, 24);
+            this.menuStrip.Size = new System.Drawing.Size(927, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -67,18 +67,18 @@
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.newGameToolStripMenuItem.Text = "New Game";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(129, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // f1ToolStripMenuItem
@@ -96,6 +96,7 @@
             this.aboutTheGameToolStripMenuItem.Name = "aboutTheGameToolStripMenuItem";
             this.aboutTheGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutTheGameToolStripMenuItem.Text = "About the game";
+            this.aboutTheGameToolStripMenuItem.Click += new System.EventHandler(this.aboutTheGameToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -107,6 +108,7 @@
             this.aboutTheAuthorToolStripMenuItem.Name = "aboutTheAuthorToolStripMenuItem";
             this.aboutTheAuthorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutTheAuthorToolStripMenuItem.Text = "About the author";
+            this.aboutTheAuthorToolStripMenuItem.Click += new System.EventHandler(this.aboutTheAuthorToolStripMenuItem_Click);
             // 
             // panelGame
             // 
@@ -115,7 +117,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelGame.Location = new System.Drawing.Point(2, 55);
             this.panelGame.Name = "panelGame";
-            this.panelGame.Size = new System.Drawing.Size(812, 422);
+            this.panelGame.Size = new System.Drawing.Size(923, 471);
             this.panelGame.TabIndex = 1;
             // 
             // labelScore
@@ -131,7 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(816, 483);
+            this.ClientSize = new System.Drawing.Size(927, 532);
             this.Controls.Add(this.labelScore);
             this.Controls.Add(this.panelGame);
             this.Controls.Add(this.menuStrip);
