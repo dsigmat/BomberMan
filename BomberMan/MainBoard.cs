@@ -21,21 +21,12 @@ namespace BomberMan
         int sizeX = 17;
         int sizeY = 11;
         static Random random = new Random();
-
+        Player player;
 
         public MainBoard(Panel panel)
         {
             panelGame = panel;
-            InitStartMap();
-        }
-
-        private void InitStartMap()
-        {
-            mapPic = new PictureBox[sizeX, sizeY];
-            map = new Sost[sizeX, sizeY];
-
-            panelGame.Controls.Clear();
-
+            
             int boxSize;
             if ((panelGame.Width / sizeX) < (panelGame.Height / sizeY))
             {
@@ -45,6 +36,17 @@ namespace BomberMan
             {
                 boxSize = panelGame.Height / sizeY;
             }
+            InitStartMap(boxSize);
+            InitStartPlayer(boxSize);
+        }
+               
+
+        private void InitStartMap(int boxSize)
+        {
+            mapPic = new PictureBox[sizeX, sizeY];
+            map = new Sost[sizeX, sizeY];
+
+            panelGame.Controls.Clear();
 
             for (int x = 0; x < sizeX; x++)
                 for (int y = 0; y < sizeY; y++)
@@ -66,6 +68,10 @@ namespace BomberMan
                         CreatePlace(new Point(x, y), boxSize, Sost.пусто);
                     }
                 }
+            ChangeSost(new Point(1,1), Sost.пусто);
+            ChangeSost(new Point(2, 1), Sost.пусто);
+            ChangeSost(new Point(1, 2), Sost.пусто);
+
         }
 
         private void CreatePlace(Point point, int boxSize, Sost sost)
@@ -105,6 +111,22 @@ namespace BomberMan
             }
 
             map[point.X, point.Y] = newSost;
+        }
+
+        private void InitStartPlayer(int boxSize)
+        {
+            int x = 1;
+            int y = 1;
+            PictureBox picture = new PictureBox();
+            picture.Location = new Point(x * (boxSize) + 7, y * (boxSize) + 3);
+            picture.Size = new Size(boxSize - 14, boxSize - 6);
+            picture.Image = Properties.Resources.player;
+            picture.BackgroundImage = Properties.Resources.ground;
+            picture.BackgroundImageLayout = ImageLayout.Stretch;
+            picture.SizeMode = PictureBoxSizeMode.StretchImage;
+            panelGame.Controls.Add(picture);
+            picture.BringToFront();
+            player = new Player(picture);
         }
     }
 }
