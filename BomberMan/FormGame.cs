@@ -12,6 +12,7 @@ namespace BomberMan
 {
     public partial class FormGame : Form
     {
+        MainBoard board;
         public FormGame()
         {
             InitializeComponent();
@@ -20,7 +21,7 @@ namespace BomberMan
 
         private void Init()
         {
-            MainBoard board = new MainBoard(panelGame);
+            board = new MainBoard(panelGame);
         }
 
         private void aboutTheGameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -52,6 +53,27 @@ had offices in Sapporo, Nagoya, Osaka, Tokyo and California,
 it employs more than 500 people. The company is currently owned 
 by Konami Corporation.
 ", "About The Author");
+        }
+
+        private void FormGame_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    board.MovePlayer(Arrows.left);
+                    break;
+                case Keys.Right:
+                    board.MovePlayer(Arrows.right);
+                    break;
+                case Keys.Up:
+                    board.MovePlayer(Arrows.up);
+                    break;
+                case Keys.Down:
+                    board.MovePlayer(Arrows.down);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

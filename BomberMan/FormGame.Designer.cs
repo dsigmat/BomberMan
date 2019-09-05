@@ -94,19 +94,19 @@
             // aboutTheGameToolStripMenuItem
             // 
             this.aboutTheGameToolStripMenuItem.Name = "aboutTheGameToolStripMenuItem";
-            this.aboutTheGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutTheGameToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.aboutTheGameToolStripMenuItem.Text = "About the game";
             this.aboutTheGameToolStripMenuItem.Click += new System.EventHandler(this.aboutTheGameToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(162, 6);
             // 
             // aboutTheAuthorToolStripMenuItem
             // 
             this.aboutTheAuthorToolStripMenuItem.Name = "aboutTheAuthorToolStripMenuItem";
-            this.aboutTheAuthorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutTheAuthorToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.aboutTheAuthorToolStripMenuItem.Text = "About the author";
             this.aboutTheAuthorToolStripMenuItem.Click += new System.EventHandler(this.aboutTheAuthorToolStripMenuItem_Click);
             // 
@@ -145,6 +145,7 @@
             this.Name = "FormGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BomberMan";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormGame_KeyDown);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);

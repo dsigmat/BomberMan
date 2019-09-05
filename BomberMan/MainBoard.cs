@@ -126,7 +126,16 @@ namespace BomberMan
             picture.SizeMode = PictureBoxSizeMode.StretchImage;
             panelGame.Controls.Add(picture);
             picture.BringToFront();
-            player = new Player(picture);
+            player = new Player(picture, mapPic);
+        }
+
+        public void MovePlayer(Arrows arrows)
+        {
+            if (player == null)
+            {
+                return;
+            }
+            player.MovePlayer(arrows);
         }
     }
 }
