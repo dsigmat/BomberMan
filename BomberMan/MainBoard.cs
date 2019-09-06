@@ -22,6 +22,7 @@ namespace BomberMan
         int sizeY = 11;
         static Random random = new Random();
         Player player;
+        Mob mob;
 
         public MainBoard(Panel panel)
         {
@@ -38,6 +39,7 @@ namespace BomberMan
             }
             InitStartMap(boxSize);
             InitStartPlayer(boxSize);
+            InitMob(boxSize);
         }
                
 
@@ -127,6 +129,23 @@ namespace BomberMan
             panelGame.Controls.Add(picture);
             picture.BringToFront();
             player = new Player(picture, mapPic, map);
+        }
+
+        private void InitMob(int boxSize)
+        {
+            int x = 15;
+            int y = 9;
+            PictureBox picture = new PictureBox();
+            picture.Location = new Point(x * (boxSize)-8, y * (boxSize)-6);
+            picture.Size = new Size(boxSize - 14, boxSize - 5);
+            picture.Image = Properties.Resources.mob;
+            picture.BackgroundImage = Properties.Resources.ground;
+            picture.BackgroundImageLayout = ImageLayout.Stretch;
+            picture.SizeMode = PictureBoxSizeMode.StretchImage;
+            panelGame.Controls.Add(picture);
+            picture.BringToFront();
+
+            mob = new Mob(picture);
         }
 
         public void MovePlayer(Arrows arrows)

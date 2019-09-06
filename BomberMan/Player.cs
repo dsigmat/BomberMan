@@ -77,16 +77,31 @@ namespace BomberMan
             int rightDownWallLeft = mapPic[playerPoint.X + 1, playerPoint.Y + 1].Location.X;
             int leftDownWallRight = mapPic[playerPoint.X - 1, playerPoint.Y + 1].Location.X + mapPic[playerPoint.X - 1, playerPoint.Y + 1].Size.Width;
 
-
+            int offset = 3;
             if (sx>0 && map[playerPoint.X + 1, playerPoint.Y] == Sost.пусто)
             {
                 if (playerUp < rightUpWallDown)
                 {
-                    sy = rightUpWallDown - playerUp;
+                    if(rightUpWallDown - playerUp < -offset)
+                    {
+                        sy = -offset;
+                    }
+                    else
+                    {
+                        sy = rightUpWallDown - playerUp;
+                    }
+                    
                 }
                 if (playerDown > rightDownWallUp)
                 {
-                    sy = rightDownWallUp - playerDown;
+                    if (rightDownWallUp - playerDown > offset)
+                    {
+                        sy = offset;
+                    }
+                    else
+                    {
+                        sy = rightDownWallUp - playerDown;
+                    }                    
                 }
                 return true;
             }
@@ -94,10 +109,21 @@ namespace BomberMan
             {
                 if (playerUp < leftUpWallDown)
                 {
-                    sy = leftUpWallDown - playerUp;
+                    if (leftUpWallDown - playerUp < -offset)
+                    {
+                        sy = -offset;
+                    }
+                    else
+                    {
+                        sy = leftUpWallDown - playerUp;
+                    }                    
                 }
                 if (playerDown > leftDownWallUp)
                 {
+                    if (leftDownWallUp - playerDown > offset)
+                    {
+                        sy = offset;
+                    }
                     sy = leftDownWallUp - playerDown;
                 }
                 return true;
@@ -106,11 +132,25 @@ namespace BomberMan
             {
                 if (playerRight > rightDownWallLeft)
                 {
-                    sx = rightDownWallLeft - playerRight;
+                    if (rightDownWallLeft - playerRight < offset)
+                    {
+                        sx = -offset;
+                    }
+                    else
+                    {
+                        sx = rightDownWallLeft - playerRight;
+                    }                    
                 }
                 if (playerLeft < leftDownWallRight)
                 {
-                    sx = leftDownWallRight - playerLeft;
+                    if (leftDownWallRight - playerLeft > offset)
+                    {
+                        sx = offset;
+                    }
+                    else
+                    {
+                        sx = leftDownWallRight - playerLeft;
+                    }                    
                 }
                 return true;
             }
@@ -118,11 +158,26 @@ namespace BomberMan
             {
                 if (playerRight > rightUpWallLeft)
                 {
-                    sx = rightUpWallLeft - playerRight;
+                    if (rightUpWallLeft - playerRight < offset)
+                    {
+                        sx = -offset;
+                    }
+                    else
+                    {
+                        sx = rightUpWallLeft - playerRight;
+                    }
+                    
                 }
                 if (playerLeft < leftUpWallRight)
                 {
-                    sx = leftUpWallRight - playerLeft;
+                    if (leftUpWallRight - playerLeft > offset)
+                    {
+                        sx = offset;
+                    }
+                    else
+                    {
+                        sx = leftUpWallRight - playerLeft;
+                    }                    
                 }
                 return true;
             }
