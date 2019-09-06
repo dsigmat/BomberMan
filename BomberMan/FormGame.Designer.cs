@@ -124,10 +124,10 @@
             // 
             this.labelScore.Location = new System.Drawing.Point(0, 27);
             this.labelScore.Name = "labelScore";
-            this.labelScore.Size = new System.Drawing.Size(816, 23);
+            this.labelScore.Size = new System.Drawing.Size(681, 23);
             this.labelScore.TabIndex = 2;
             this.labelScore.Text = "NewGame";
-            this.labelScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelScore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FormGame
             // 
