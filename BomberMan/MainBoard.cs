@@ -142,7 +142,7 @@ namespace BomberMan
             FindEmptyPlace(out x, out y);
             PictureBox picture = new PictureBox();
             picture.Location = new Point(x * (boxSize)-8, y * (boxSize)-6);
-            picture.Size = new Size(boxSize - 14, boxSize - 5);
+            picture.Size = new Size(boxSize - 14, boxSize - 6);
             picture.Image = Properties.Resources.mob;
             picture.BackgroundImage = Properties.Resources.ground;
             picture.BackgroundImageLayout = ImageLayout.Stretch;
@@ -164,7 +164,10 @@ namespace BomberMan
 
         public void PutBomb()
         {
-            ChangeSost(player.MyNowPoint(), Sost.бомба);
+            Point playerPoint = player.MyNowPoint();
+            if (map[playerPoint.X, playerPoint.Y] == Sost.бомба) return;
+            if(player.PutBomb(mapPic))
+                ChangeSost(player.MyNowPoint(), Sost.бомба);
         }
 
         private void FindEmptyPlace(out int x, out int y)

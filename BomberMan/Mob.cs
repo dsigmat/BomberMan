@@ -42,7 +42,7 @@ namespace BomberMan
         private void CreateTimer()
         {
             timer = new Timer();
-            timer.Interval = 50;
+            timer.Interval = 10;
             timer.Tick += timer_Tick;   
         }
 

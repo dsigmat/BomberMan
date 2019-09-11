@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace BomberMan
@@ -15,12 +16,15 @@ namespace BomberMan
         PictureBox player;
         int step;
         MovingClass moving;
+        List<Bomb> bombs;
+        int kolBomb = 3;
 
         public Player(PictureBox _player, PictureBox[,] _mapPic, Sost[,] _map)
         {
             player = _player;
             step = 3;
             moving = new MovingClass(_player, _mapPic, _map);
+            bombs = new List<Bomb>();
         }
 
         public void MovePlayer(Arrows arrows)
@@ -47,6 +51,14 @@ namespace BomberMan
         public Point MyNowPoint()
         {
             return moving.MyNowPoint();
+        }
+
+        public bool PutBomb(PictureBox[,] mapPic)
+        {
+            if (bombs.Count >= kolBomb) return false;
+            Bomb bomb = new Bomb(mapPic, MyNowPoint());
+            bombs.Add(bomb);
+            return true;
         }
     }
 }

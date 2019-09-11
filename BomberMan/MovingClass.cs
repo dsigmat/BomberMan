@@ -36,7 +36,7 @@ namespace BomberMan
             int rightWallLeft = mapPic[playerPoint.X + 1, playerPoint.Y].Location.X;
             int leftWallRight = mapPic[playerPoint.X - 1, playerPoint.Y].Location.X + mapPic[playerPoint.X - 1, playerPoint.Y].Size.Width;
             int downWallUp = mapPic[playerPoint.X, playerPoint.Y + 1].Location.Y;
-            int UpWallDown = mapPic[playerPoint.X, playerPoint.Y - 1].Location.Y + mapPic[playerPoint.X, playerPoint.Y - 1].Size.Height; ;
+            int UpWallDown = mapPic[playerPoint.X, playerPoint.Y - 1].Location.Y + mapPic[playerPoint.X, playerPoint.Y - 1].Size.Height;
 
             int rightUpWallDown = mapPic[playerPoint.X + 1, playerPoint.Y - 1].Location.Y + mapPic[playerPoint.X + 1, playerPoint.Y - 1].Size.Height;
             int rightDownWallUp = mapPic[playerPoint.X + 1, playerPoint.Y + 1].Location.Y;
@@ -53,9 +53,9 @@ namespace BomberMan
             {
                 if (playerUp < rightUpWallDown)
                 {
-                    if (rightUpWallDown - playerUp < -offset)
+                    if (rightUpWallDown - playerUp > offset)
                     {
-                        sy = -offset;
+                        sy = offset;
                     }
                     else
                     {
@@ -65,9 +65,9 @@ namespace BomberMan
                 }
                 if (playerDown > rightDownWallUp)
                 {
-                    if (rightDownWallUp - playerDown > offset)
+                    if (rightDownWallUp - playerDown < -offset)
                     {
-                        sy = offset;
+                        sy = -offset;
                     }
                     else
                     {
@@ -80,9 +80,9 @@ namespace BomberMan
             {
                 if (playerUp < leftUpWallDown)
                 {
-                    if (leftUpWallDown - playerUp < -offset)
+                    if (leftUpWallDown - playerUp > offset)
                     {
-                        sy = -offset;
+                        sy = offset;
                     }
                     else
                     {
@@ -91,9 +91,9 @@ namespace BomberMan
                 }
                 if (playerDown > leftDownWallUp)
                 {
-                    if (leftDownWallUp - playerDown > offset)
+                    if (leftDownWallUp - playerDown < -offset)
                     {
-                        sy = offset;
+                        sy = -offset;
                     }
                     sy = leftDownWallUp - playerDown;
                 }
@@ -103,7 +103,7 @@ namespace BomberMan
             {
                 if (playerRight > rightDownWallLeft)
                 {
-                    if (rightDownWallLeft - playerRight < offset)
+                    if (rightDownWallLeft - playerRight < -offset)
                     {
                         sx = -offset;
                     }
@@ -129,7 +129,7 @@ namespace BomberMan
             {
                 if (playerRight > rightUpWallLeft)
                 {
-                    if (rightUpWallLeft - playerRight < offset)
+                    if (rightUpWallLeft - playerRight < -offset)
                     {
                         sx = -offset;
                     }
@@ -161,11 +161,11 @@ namespace BomberMan
             {
                 sx = leftWallRight - playerLeft;
             }
-            if (sy > 0 && playerDown + sx > downWallUp)
+            if (sy > 0 && playerDown + sy > downWallUp)
             {
                 sy = downWallUp - playerDown;
             }
-            if (sy < 0 && playerUp + sx < UpWallDown)
+            if (sy < 0 && playerUp + sy < UpWallDown)
             {
                 sy = UpWallDown - playerUp;
             }
