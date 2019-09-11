@@ -6,6 +6,13 @@ namespace BomberMan
 {
     class Mob
     {
+        /// <summary>
+        /// Уровни сложности:
+        ///     1. Самый глупый - выбирает доступную точку и бежит к ней.
+        ///     2. Умный        - выбирает доступную точку и бежит к ней, если видит бомбу - убегает.
+        ///     3. Самый умный  - бегает от точки к точке, если доступен человек - бежит к нему, если встретил бомбу - убегает.
+        /// </summary>
+
         PictureBox mob;
         Timer timer;
         Point destinePlace;
@@ -17,14 +24,14 @@ namespace BomberMan
         int paths;
         Point[] path;
         int pathStep;
-
+        static Random rand = new Random();
 
         public Mob(PictureBox picMob, PictureBox[,] _mapPic, Sost[,] _map)
         {
             mob = picMob;
             map = _map;
             fmap = new int[map.GetLength(0), map.GetLength(1)];
-            path = new Point[map.GetLength(0), map.GetLength(1)];
+            path = new Point[map.GetLength(0) * map.GetLength(1)];
             moving = new MovingClass(picMob, _mapPic, _map);
             mobPlace = moving.MyNowPoint();
             destinePlace = new Point(15, 7);
@@ -41,8 +48,14 @@ namespace BomberMan
 
         void timer_Tick(object sender, EventArgs e)
         {
-            if (mobPlace == destinePlace) return;
-            MoveMob(destinePlace);
+            if (mobPlace == destinePlace) GetNewPlace();
+            if (path[0].X == 0 & path[0].Y == 0)
+                if (!FindPath()) return;
+            if (pathStep > paths) return;
+            if (path[pathStep] == mobPlace)
+                pathStep++;
+            else
+                MoveMob(destinePlace);
         }
 
         private void MoveMob(Point newPlace)
@@ -131,6 +144,20 @@ namespace BomberMan
             if (x < 0 || x >= map.GetLength(0)) return false;
             if (y < 0 || y >= map.GetLength(1)) return false;
             return fmap[x, y] == n;
+        }
+
+        private void GetNewPlace()
+        {
+            int loop = 0;
+            do
+            {
+                destinePlace.X = rand.Next(1, map.GetLength(0)-1);
+                destinePlace.Y = rand.Next(1, map.GetLength(1) - 1);
+            } while (!FindPath() && loop++ < 100);
+            if (loop>=100)
+            {
+                destinePlace = mobPlace;
+            }
         }
     }
 }
