@@ -34,7 +34,7 @@ namespace BomberMan
             path = new Point[map.GetLength(0) * map.GetLength(1)];
             moving = new MovingClass(picMob, _mapPic, _map);
             mobPlace = moving.MyNowPoint();
-            destinePlace = new Point(15, 7);
+            destinePlace = mobPlace;
             CreateTimer();
             timer.Enabled = true;
         }
@@ -55,7 +55,7 @@ namespace BomberMan
             if (path[pathStep] == mobPlace)
                 pathStep++;
             else
-                MoveMob(destinePlace);
+                MoveMob(path[pathStep]);
         }
 
         private void MoveMob(Point newPlace)
@@ -136,6 +136,7 @@ namespace BomberMan
             if (x < 0 || x >= map.GetLength(0)) return;
             if (y < 0 || y >= map.GetLength(1)) return;
             if (fmap[x, y] > 0) return;
+            if (map[x, y] != Sost.пусто) return;
             fmap[x, y] = n;
         }
 

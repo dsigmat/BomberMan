@@ -39,7 +39,11 @@ namespace BomberMan
             }
             InitStartMap(boxSize);
             InitStartPlayer(boxSize);
-            InitMob(boxSize);
+            for (int i = 0; i < 5; i++)
+            {
+                InitMob(boxSize);
+            }
+            
         }
                
 
@@ -135,6 +139,7 @@ namespace BomberMan
         {
             int x = 15;
             int y = 9;
+            FindEmptyPlace(out x, out y);
             PictureBox picture = new PictureBox();
             picture.Location = new Point(x * (boxSize)-8, y * (boxSize)-6);
             picture.Size = new Size(boxSize - 14, boxSize - 5);
@@ -155,6 +160,21 @@ namespace BomberMan
                 return;
             }
             player.MovePlayer(arrows);
+        }
+
+        public void PutBomb()
+        {
+            ChangeSost(player.MyNowPoint(), Sost.бомба);
+        }
+
+        private void FindEmptyPlace(out int x, out int y)
+        {
+            int loop = 0;
+            do
+            {
+                x = random.Next(map.GetLength(0)/2, map.GetLength(0));
+                y = random.Next(1, map.GetLength(1));
+            } while (map[x,y] != Sost.пусто && loop++<100);
         }
     }
 }

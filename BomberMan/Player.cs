@@ -44,5 +44,9 @@ namespace BomberMan
             }
         }
         
+        public Point MyNowPoint()
+        {
+            return moving.MyNowPoint();
+        }
     }
 }

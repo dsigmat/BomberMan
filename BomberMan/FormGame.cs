@@ -71,6 +71,9 @@ by Konami Corporation.
                 case Keys.Down:
                     board.MovePlayer(Arrows.down);
                     break;
+                case Keys.Space:
+                    board.PutBomb();
+                    break;
                 default:
                     break;
             }
