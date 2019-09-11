@@ -145,7 +145,7 @@ namespace BomberMan
             panelGame.Controls.Add(picture);
             picture.BringToFront();
 
-            mob = new Mob(picture);
+            mob = new Mob(picture, mapPic, map);
         }
 
         public void MovePlayer(Arrows arrows)
