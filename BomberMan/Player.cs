@@ -16,13 +16,16 @@ namespace BomberMan
         PictureBox player;
         int step;
         MovingClass moving;
-        List<Bomb> bombs;
-        int kolBomb = 3;
+        public List<Bomb> bombs { get; private set; }
+        int kolBomb;
+        public int lenFire { get; private set; }
 
         public Player(PictureBox _player, PictureBox[,] _mapPic, Sost[,] _map)
         {
             player = _player;
             step = 3;
+            kolBomb = 3;
+            lenFire = 3;
             moving = new MovingClass(_player, _mapPic, _map);
             bombs = new List<Bomb>();
         }

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace BomberMan
 {
-    public delegate void deBabah();
+    public delegate void deBabah(Bomb b);
     enum Sost
     {
         пусто,
@@ -181,11 +181,72 @@ namespace BomberMan
                 ChangeSost(player.MyNowPoint(), Sost.бомба);
         }
 
-        private void Babah()
+        private void Babah(Bomb bomb)
         {
-            MessageBox.Show("ВЗРЫВ!!!");
+            ChangeSost(bomb.bombPlace, Sost.огонь);
+            bool isNotDone = true;
+            int sx = 0; int sy = 0;
+
+            do
+            {//влево
+                if (++sx > player.lenFire) break;
+                if (isFire(bomb.bombPlace, -sx, sy))
+                    ChangeSost(new Point (bomb.bombPlace.X - sx, bomb.bombPlace.Y + sy), Sost.огонь);
+                isNotDone = false;
+            } while (isNotDone);
+
+            isNotDone = true;
+            sx = 0; sy = 0;
+            do
+            {//вправо
+                if (++sx > player.lenFire) break;
+                if (isFire(bomb.bombPlace, +sx, sy))
+                    ChangeSost(new Point(bomb.bombPlace.X + sx, bomb.bombPlace.Y + sy), Sost.огонь);
+                isNotDone = false;
+            } while (isNotDone);
+
+            isNotDone = true;
+            sx = 0; sy = 0;
+            do
+            {//вверх
+                if (++sy > player.lenFire) break;
+                if (isFire(bomb.bombPlace, sx, -sy))
+                    ChangeSost(new Point(bomb.bombPlace.X + sx, bomb.bombPlace.Y - sy), Sost.огонь);
+                isNotDone = false;
+            } while (isNotDone);
+
+            isNotDone = true;
+            sx = 0; sy = 0;
+            do
+            {//вниз
+                if (++sy > player.lenFire) break;
+                if (isFire(bomb.bombPlace, sx, sy))
+                    ChangeSost(new Point(bomb.bombPlace.X + sx, bomb.bombPlace.Y + sy), Sost.огонь);
+                isNotDone = false;
+            } while (isNotDone);
         }
 
-
+        private bool isFire(Point place, int sx, int sy)
+        {
+            switch (map[place.X + sx, place.Y + sy])
+            {
+                case Sost.пусто:
+                    return true;
+                case Sost.стена:
+                    return false;
+                case Sost.кирпич:
+                    ChangeSost(new Point(place.X + sx, place.Y + sy), Sost.огонь);
+                    return false;
+                case Sost.бомба:
+                    foreach (Bomb bomb in player.bombs)
+                    {
+                        if (bomb.bombPlace == new Point(place.X + place.Y + sy))
+                            bomb.Reaction();
+                    }
+                    return false;
+                default:
+                    return true;
+            }
+        }
     }
 }

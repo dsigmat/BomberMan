@@ -91,6 +91,7 @@
   <ItemGroup>
     <Content Include="bombastik.ico" />
     <None Include="Resources\bomb.png" />
+    <None Include="Resources\Image1.bmp" />
     <None Include="Resources\fire.png" />
     <None Include="Resources\prize.png" />
     <None Include="Resources\ground.png" />

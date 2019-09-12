@@ -3,12 +3,12 @@ using System.Windows.Forms;
 
 namespace BomberMan
 {
-    class Bomb
+    public class Bomb
     {
         Timer timer;
         int kolSec = 4;
         PictureBox[,] mapPic;
-        Point bombPlace;
+        public Point bombPlace { get; private set; }
         deBabah baBah;
 
 
@@ -34,8 +34,8 @@ namespace BomberMan
             if(kolSec <= 0)
             {
                 timer.Enabled = false;
-                string str = "Бомба активирована!";
-                baBah();
+
+                baBah(this);
                 return;
             }
             WriteTimer(--kolSec);
@@ -57,6 +57,11 @@ namespace BomberMan
                     Brushes.Red,
                     point);
             }
+        }
+
+        public void Reaction()
+        {
+            kolSec = 0;
         }
     }
 }
