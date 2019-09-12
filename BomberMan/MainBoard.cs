@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -23,11 +24,12 @@ namespace BomberMan
         int sizeY = 11;
         static Random random = new Random();
         Player player;
-        Mob mob;
+        List<Mob> mobs;
 
         public MainBoard(Panel panel)
         {
             panelGame = panel;
+            mobs = new List<Mob>();
 
             int boxSize;
             if ((panelGame.Width / sizeX) < (panelGame.Height / sizeY))
@@ -151,7 +153,7 @@ namespace BomberMan
             panelGame.Controls.Add(picture);
             picture.BringToFront();
 
-            mob = new Mob(picture, mapPic, map);
+            mobs.Add(new Mob(picture, mapPic, map));
         }
 
         public void MovePlayer(Arrows arrows)
@@ -184,44 +186,61 @@ namespace BomberMan
         private void Babah(Bomb bomb)
         {
             ChangeSost(bomb.bombPlace, Sost.огонь);
+            Flame(bomb.bombPlace, Arrows.left);
+            Flame(bomb.bombPlace, Arrows.right);
+            Flame(bomb.bombPlace, Arrows.up);
+            Flame(bomb.bombPlace, Arrows.down);
+            player.RemoveBomb(bomb);
+
+            Blaze();
+        }
+
+        private void Blaze()
+        {
+            List<Mob> delMobs = new List<Mob>();
+            foreach (Mob mob in mobs)
+            {
+                Point mobPoint = mob.MyNowPoint();
+                if (map[mobPoint.X, mobPoint.Y] == Sost.огонь)
+                    delMobs.Add(mob);
+            }
+            for (int x = 0; x < delMobs.Count; x++)
+            {
+                mobs.Remove(delMobs[x]);
+                panelGame.Controls.Remove(delMobs[x].mob);
+                delMobs[x] = null;
+            }
+        }
+
+        private void Flame(Point bombPlace, Arrows arrow)
+        {
+            int sx = 0, sy = 0;
+            switch (arrow)
+            {
+                case Arrows.left:
+                    sx = -1;
+                    break;
+                case Arrows.right:
+                    sx = 1;
+                    break;
+                case Arrows.up:
+                    sy = -1;
+                    break;
+                case Arrows.down:
+                    sy = 1;
+                    break;
+                default:
+                    break;
+            }
+
             bool isNotDone = true;
-            int sx = 0; int sy = 0;
-
+            int x = 0, y = 0;
             do
-            {//влево
-                if (++sx > player.lenFire) break;
-                if (isFire(bomb.bombPlace, -sx, sy))
-                    ChangeSost(new Point (bomb.bombPlace.X - sx, bomb.bombPlace.Y + sy), Sost.огонь);
-                isNotDone = false;
-            } while (isNotDone);
-
-            isNotDone = true;
-            sx = 0; sy = 0;
-            do
-            {//вправо
-                if (++sx > player.lenFire) break;
-                if (isFire(bomb.bombPlace, +sx, sy))
-                    ChangeSost(new Point(bomb.bombPlace.X + sx, bomb.bombPlace.Y + sy), Sost.огонь);
-                isNotDone = false;
-            } while (isNotDone);
-
-            isNotDone = true;
-            sx = 0; sy = 0;
-            do
-            {//вверх
-                if (++sy > player.lenFire) break;
-                if (isFire(bomb.bombPlace, sx, -sy))
-                    ChangeSost(new Point(bomb.bombPlace.X + sx, bomb.bombPlace.Y - sy), Sost.огонь);
-                isNotDone = false;
-            } while (isNotDone);
-
-            isNotDone = true;
-            sx = 0; sy = 0;
-            do
-            {//вниз
-                if (++sy > player.lenFire) break;
-                if (isFire(bomb.bombPlace, sx, sy))
-                    ChangeSost(new Point(bomb.bombPlace.X + sx, bomb.bombPlace.Y + sy), Sost.огонь);
+            {
+                x += sx; y += sy;
+                if (Math.Abs(x) > player.lenFire || Math.Abs(y) > player.lenFire) break;
+                if (isFire(bombPlace, x, y))
+                    ChangeSost(new Point(bombPlace.X + x, bombPlace.Y + y), Sost.огонь);
                 isNotDone = false;
             } while (isNotDone);
         }

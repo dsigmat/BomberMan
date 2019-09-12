@@ -63,5 +63,6 @@ namespace BomberMan
         {
             kolSec = 0;
         }
+
     }
 }

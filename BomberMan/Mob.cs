@@ -13,7 +13,7 @@ namespace BomberMan
         ///     3. Самый умный  - бегает от точки к точке, если доступен человек - бежит к нему, если встретил бомбу - убегает.
         /// </summary>
 
-        PictureBox mob;
+        public PictureBox mob { get; private set; }
         Timer timer;
         Point destinePlace;
         Point mobPlace;
@@ -160,5 +160,9 @@ namespace BomberMan
                 destinePlace = mobPlace;
             }
         }
+
+        public Point MyNowPoint()
+        {
+            return moving.MyNowPoint();        }
     }
 }

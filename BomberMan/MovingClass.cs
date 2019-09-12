@@ -49,7 +49,7 @@ namespace BomberMan
             int leftDownWallRight = mapPic[playerPoint.X - 1, playerPoint.Y + 1].Location.X + mapPic[playerPoint.X - 1, playerPoint.Y + 1].Size.Width;
 
             int offset = 3;
-            if (sx > 0 && map[playerPoint.X + 1, playerPoint.Y] == Sost.пусто)
+            if (sx > 0 && (map[playerPoint.X + 1, playerPoint.Y] == Sost.пусто || map[playerPoint.X + 1, playerPoint.Y] == Sost.огонь))
             {
                 if (playerUp < rightUpWallDown)
                 {
@@ -76,7 +76,7 @@ namespace BomberMan
                 }
                 return true;
             }
-            if (sx < 0 && map[playerPoint.X - 1, playerPoint.Y] == Sost.пусто)
+            if (sx < 0 && (map[playerPoint.X - 1, playerPoint.Y] == Sost.пусто || map[playerPoint.X - 1, playerPoint.Y] == Sost.огонь))
             {
                 if (playerUp < leftUpWallDown)
                 {
@@ -99,7 +99,7 @@ namespace BomberMan
                 }
                 return true;
             }
-            if (sy > 0 && map[playerPoint.X, playerPoint.Y + 1] == Sost.пусто)
+            if (sy > 0 && (map[playerPoint.X, playerPoint.Y + 1] == Sost.пусто|| map[playerPoint.X, playerPoint.Y + 1] == Sost.огонь))
             {
                 if (playerRight > rightDownWallLeft)
                 {
@@ -125,7 +125,7 @@ namespace BomberMan
                 }
                 return true;
             }
-            if (sy < 0 && map[playerPoint.X, playerPoint.Y - 1] == Sost.пусто)
+            if (sy < 0 && (map[playerPoint.X, playerPoint.Y - 1] == Sost.пусто|| map[playerPoint.X, playerPoint.Y - 1] == Sost.огонь))
             {
                 if (playerRight > rightUpWallLeft)
                 {

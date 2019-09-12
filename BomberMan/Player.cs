@@ -63,5 +63,10 @@ namespace BomberMan
             bombs.Add(bomb);
             return true;
         }
+        
+        public void RemoveBomb(Bomb bomb)
+        {
+            bombs.Remove(bomb);
+        }
     }
 }
