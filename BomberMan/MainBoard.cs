@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 namespace BomberMan
 {
+    public delegate void deBabah();
     enum Sost
     {
         пусто,
@@ -27,7 +28,7 @@ namespace BomberMan
         public MainBoard(Panel panel)
         {
             panelGame = panel;
-            
+
             int boxSize;
             if ((panelGame.Width / sizeX) < (panelGame.Height / sizeY))
             {
@@ -43,9 +44,9 @@ namespace BomberMan
             {
                 InitMob(boxSize);
             }
-            
+
         }
-               
+
 
         private void InitStartMap(int boxSize)
         {
@@ -57,15 +58,15 @@ namespace BomberMan
             for (int x = 0; x < sizeX; x++)
                 for (int y = 0; y < sizeY; y++)
                 {
-                    if (x==0||y==0||x==sizeX - 1||y==sizeY - 1)
+                    if (x == 0 || y == 0 || x == sizeX - 1 || y == sizeY - 1)
                     {
                         CreatePlace(new Point(x, y), boxSize, Sost.стена);
                     }
-                    else if (x%2 == 0 && y%2 == 0)
+                    else if (x % 2 == 0 && y % 2 == 0)
                     {
                         CreatePlace(new Point(x, y), boxSize, Sost.стена);
                     }
-                    else if (random.Next(3)==0)
+                    else if (random.Next(3) == 0)
                     {
                         CreatePlace(new Point(x, y), boxSize, Sost.кирпич);
                     }
@@ -74,7 +75,7 @@ namespace BomberMan
                         CreatePlace(new Point(x, y), boxSize, Sost.пусто);
                     }
                 }
-            ChangeSost(new Point(1,1), Sost.пусто);
+            ChangeSost(new Point(1, 1), Sost.пусто);
             ChangeSost(new Point(2, 1), Sost.пусто);
             ChangeSost(new Point(1, 2), Sost.пусто);
 
@@ -141,7 +142,7 @@ namespace BomberMan
             int y = 9;
             FindEmptyPlace(out x, out y);
             PictureBox picture = new PictureBox();
-            picture.Location = new Point(x * (boxSize)-8, y * (boxSize)-6);
+            picture.Location = new Point(x * (boxSize) - 8, y * (boxSize) - 6);
             picture.Size = new Size(boxSize - 14, boxSize - 6);
             picture.Image = Properties.Resources.mob;
             picture.BackgroundImage = Properties.Resources.ground;
@@ -162,22 +163,29 @@ namespace BomberMan
             player.MovePlayer(arrows);
         }
 
-        public void PutBomb()
-        {
-            Point playerPoint = player.MyNowPoint();
-            if (map[playerPoint.X, playerPoint.Y] == Sost.бомба) return;
-            if(player.PutBomb(mapPic))
-                ChangeSost(player.MyNowPoint(), Sost.бомба);
-        }
-
         private void FindEmptyPlace(out int x, out int y)
         {
             int loop = 0;
             do
             {
-                x = random.Next(map.GetLength(0)/2, map.GetLength(0));
+                x = random.Next(map.GetLength(0) / 2, map.GetLength(0));
                 y = random.Next(1, map.GetLength(1));
-            } while (map[x,y] != Sost.пусто && loop++<100);
+            } while (map[x, y] != Sost.пусто && loop++ < 100);
         }
+
+        public void PutBomb()
+        {
+            Point playerPoint = player.MyNowPoint();
+            if (map[playerPoint.X, playerPoint.Y] == Sost.бомба) return;
+            if (player.PutBomb(mapPic, Babah))
+                ChangeSost(player.MyNowPoint(), Sost.бомба);
+        }
+
+        private void Babah()
+        {
+            MessageBox.Show("ВЗРЫВ!!!");
+        }
+
+
     }
 }

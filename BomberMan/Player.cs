@@ -53,10 +53,10 @@ namespace BomberMan
             return moving.MyNowPoint();
         }
 
-        public bool PutBomb(PictureBox[,] mapPic)
+        public bool PutBomb(PictureBox[,] mapPic, deBabah _deBabah)
         {
             if (bombs.Count >= kolBomb) return false;
-            Bomb bomb = new Bomb(mapPic, MyNowPoint());
+            Bomb bomb = new Bomb(mapPic, MyNowPoint(), _deBabah);
             bombs.Add(bomb);
             return true;
         }

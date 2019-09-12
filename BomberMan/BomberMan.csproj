@@ -90,10 +90,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bombastik.ico" />
+    <None Include="Resources\bomb.png" />
     <None Include="Resources\fire.png" />
     <None Include="Resources\prize.png" />
     <None Include="Resources\ground.png" />
-    <None Include="Resources\bomb.png" />
     <None Include="Resources\wall.png" />
     <None Include="Resources\player.png" />
     <None Include="Resources\enamy.png" />

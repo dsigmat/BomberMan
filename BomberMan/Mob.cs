@@ -43,7 +43,7 @@ namespace BomberMan
         {
             timer = new Timer();
             timer.Interval = 10;
-            timer.Tick += timer_Tick;   
+            timer.Tick += timer_Tick;
         }
 
         void timer_Tick(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace BomberMan
                 added = false;
                 for (int x = 0; x < map.GetLength(0); x++)
                     for (int y = 0; y < map.GetLength(1); y++)
-                        if (fmap[x,y] == nr)
+                        if (fmap[x, y] == nr)
                         {
                             MarkPath(x + 1, y, nr + 1);
                             MarkPath(x - 1, y, nr + 1);
@@ -117,7 +117,7 @@ namespace BomberMan
             int sx = destinePlace.X;
             int sy = destinePlace.Y;
             paths = nr;
-            while (nr>=0)
+            while (nr >= 0)
             {
                 path[nr].X = sx;
                 path[nr].Y = sy;
@@ -152,10 +152,10 @@ namespace BomberMan
             int loop = 0;
             do
             {
-                destinePlace.X = rand.Next(1, map.GetLength(0)-1);
+                destinePlace.X = rand.Next(1, map.GetLength(0) - 1);
                 destinePlace.Y = rand.Next(1, map.GetLength(1) - 1);
             } while (!FindPath() && loop++ < 100);
-            if (loop>=100)
+            if (loop >= 100)
             {
                 destinePlace = mobPlace;
             }
