@@ -26,12 +26,14 @@ namespace BomberMan
         Player player;
         List<Mob> mobs;
         deClear NeedClear;
+        Label score;
 
-        public MainBoard(Panel panel, deClear _deClear)
+        public MainBoard(Panel panel, deClear _deClear, Label _score)
         {
             panelGame = panel;
             mobs = new List<Mob>();
             NeedClear = _deClear;
+            score = _score;
 
             int boxSize;
             if ((panelGame.Width / sizeX) < (panelGame.Height / sizeY))
@@ -137,7 +139,7 @@ namespace BomberMan
             picture.SizeMode = PictureBoxSizeMode.StretchImage;
             panelGame.Controls.Add(picture);
             picture.BringToFront();
-            player = new Player(picture, mapPic, map);
+            player = new Player(picture, mapPic, map, score);
         }
 
         private void InitMob(int boxSize)
@@ -294,6 +296,14 @@ namespace BomberMan
                 if (myPoint == mob.MyNowPoint()) return true;
             }
             return false;
+        }
+
+        public void SetMobLevel(int level)
+        {
+            foreach (Mob mob in mobs)
+            {
+                mob.SetLevel(level);
+            }
         }
     }
 }

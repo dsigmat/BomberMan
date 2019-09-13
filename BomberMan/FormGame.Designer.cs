@@ -34,6 +34,11 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.сложностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.самыйГлупыйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.умнееToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.самыйУмныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.f1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutTheGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,11 +48,6 @@
             this.labelScore = new System.Windows.Forms.Label();
             this.timerFireClear = new System.Windows.Forms.Timer(this.components);
             this.timerGameOver = new System.Windows.Forms.Timer(this.components);
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.сложностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.самыйГлупыйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.умнееToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.самыйУмныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,6 +85,42 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // сложностьToolStripMenuItem
+            // 
+            this.сложностьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.самыйГлупыйToolStripMenuItem,
+            this.умнееToolStripMenuItem,
+            this.самыйУмныйToolStripMenuItem});
+            this.сложностьToolStripMenuItem.Name = "сложностьToolStripMenuItem";
+            this.сложностьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сложностьToolStripMenuItem.Text = "Сложность";
+            // 
+            // самыйГлупыйToolStripMenuItem
+            // 
+            this.самыйГлупыйToolStripMenuItem.Name = "самыйГлупыйToolStripMenuItem";
+            this.самыйГлупыйToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.самыйГлупыйToolStripMenuItem.Text = "Самый глупый";
+            this.самыйГлупыйToolStripMenuItem.Click += new System.EventHandler(this.самыйГлупыйToolStripMenuItem_Click);
+            // 
+            // умнееToolStripMenuItem
+            // 
+            this.умнееToolStripMenuItem.Name = "умнееToolStripMenuItem";
+            this.умнееToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.умнееToolStripMenuItem.Text = "Умнее";
+            this.умнееToolStripMenuItem.Click += new System.EventHandler(this.умнееToolStripMenuItem_Click);
+            // 
+            // самыйУмныйToolStripMenuItem
+            // 
+            this.самыйУмныйToolStripMenuItem.Name = "самыйУмныйToolStripMenuItem";
+            this.самыйУмныйToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.самыйУмныйToolStripMenuItem.Text = "Самый умный";
+            this.самыйУмныйToolStripMenuItem.Click += new System.EventHandler(this.самыйУмныйToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -149,39 +185,6 @@
             // timerGameOver
             // 
             this.timerGameOver.Tick += new System.EventHandler(this.timerGameOver_Tick);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
-            // 
-            // сложностьToolStripMenuItem
-            // 
-            this.сложностьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.самыйГлупыйToolStripMenuItem,
-            this.умнееToolStripMenuItem,
-            this.самыйУмныйToolStripMenuItem});
-            this.сложностьToolStripMenuItem.Name = "сложностьToolStripMenuItem";
-            this.сложностьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.сложностьToolStripMenuItem.Text = "Сложность";
-            // 
-            // самыйГлупыйToolStripMenuItem
-            // 
-            this.самыйГлупыйToolStripMenuItem.Name = "самыйГлупыйToolStripMenuItem";
-            this.самыйГлупыйToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.самыйГлупыйToolStripMenuItem.Text = "Самый глупый";
-            // 
-            // умнееToolStripMenuItem
-            // 
-            this.умнееToolStripMenuItem.Name = "умнееToolStripMenuItem";
-            this.умнееToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.умнееToolStripMenuItem.Text = "Умнее";
-            // 
-            // самыйУмныйToolStripMenuItem
-            // 
-            this.самыйУмныйToolStripMenuItem.Name = "самыйУмныйToolStripMenuItem";
-            this.самыйУмныйToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.самыйУмныйToolStripMenuItem.Text = "Самый умный";
             // 
             // FormGame
             // 

@@ -19,15 +19,18 @@ namespace BomberMan
         public List<Bomb> bombs { get; private set; }
         int kolBomb;
         public int lenFire { get; private set; }
+        Label score;
 
-        public Player(PictureBox _player, PictureBox[,] _mapPic, Sost[,] _map)
+        public Player(PictureBox _player, PictureBox[,] _mapPic, Sost[,] _map, Label lbScore)
         {
+            score = lbScore;
             player = _player;
             step = 3;
             kolBomb = 3;
             lenFire = 3;
             moving = new MovingClass(_player, _mapPic, _map);
             bombs = new List<Bomb>();
+            ChangeScore();
         }
 
         public void MovePlayer(Arrows arrows)
@@ -67,6 +70,12 @@ namespace BomberMan
         public void RemoveBomb(Bomb bomb)
         {
             bombs.Remove(bomb);
+        }
+
+        private void ChangeScore()
+        {
+            if (score == null) return;
+            score.Text = "Скорость: " + step + " кол-во бомб: " + kolBomb + " сила бомб: " + lenFire;
         }
     }
 }

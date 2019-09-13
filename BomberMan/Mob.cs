@@ -169,5 +169,10 @@ namespace BomberMan
         public Point MyNowPoint()
         {
             return moving.MyNowPoint();        }
+
+        public void SetLevel(int _level)
+        {
+            level = _level;
+        }
     }
 }

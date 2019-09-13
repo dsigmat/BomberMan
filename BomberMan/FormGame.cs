@@ -14,6 +14,8 @@ namespace BomberMan
     public partial class FormGame : Form
     {
         MainBoard board;
+        int level = 1;
+
         public FormGame()
         {
             InitializeComponent();
@@ -22,7 +24,8 @@ namespace BomberMan
 
         private void NewGame()
         {
-            board = new MainBoard(panelGame, StartClear);
+            board = new MainBoard(panelGame, StartClear, labelScore);
+            ChangeLevel(level);
             timerGameOver.Enabled = true;
         }
 
@@ -116,6 +119,27 @@ by Konami Corporation.
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ChangeLevel(int _level)
+        {
+            level = _level;
+            board.SetMobLevel(level);
+        }
+
+        private void умнееToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeLevel(2);
+        }
+
+        private void самыйУмныйToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeLevel(3);
+        }
+
+        private void самыйГлупыйToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeLevel(1);
         }
     }
 }
