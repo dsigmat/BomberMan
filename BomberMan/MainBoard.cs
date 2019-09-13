@@ -25,11 +25,13 @@ namespace BomberMan
         static Random random = new Random();
         Player player;
         List<Mob> mobs;
+        deClear NeedClear;
 
-        public MainBoard(Panel panel)
+        public MainBoard(Panel panel, deClear _deClear)
         {
             panelGame = panel;
             mobs = new List<Mob>();
+            NeedClear = _deClear;
 
             int boxSize;
             if ((panelGame.Width / sizeX) < (panelGame.Height / sizeY))
@@ -153,7 +155,7 @@ namespace BomberMan
             panelGame.Controls.Add(picture);
             picture.BringToFront();
 
-            mobs.Add(new Mob(picture, mapPic, map));
+            mobs.Add(new Mob(picture, mapPic, map, player));
         }
 
         public void MovePlayer(Arrows arrows)
@@ -193,6 +195,7 @@ namespace BomberMan
             player.RemoveBomb(bomb);
 
             Blaze();
+            NeedClear();
         }
 
         private void Blaze()
@@ -210,6 +213,8 @@ namespace BomberMan
                 panelGame.Controls.Remove(delMobs[x].mob);
                 delMobs[x] = null;
             }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private void Flame(Point bombPlace, Arrows arrow)
@@ -266,6 +271,29 @@ namespace BomberMan
                 default:
                     return true;
             }
+        }
+
+        public void ClearFire()
+        {
+            for (int x = 0; x < map.GetLength(0); x++)
+                for (int y = 0; y < map.GetLength(1); y++)
+                {
+                    if (map[x, y] == Sost.огонь)
+                        ChangeSost(new Point(x, y), Sost.пусто);
+                }
+        }
+
+        public bool GameOver()
+        {
+            Point myPoint = player.MyNowPoint();
+            if (map[myPoint.X, myPoint.Y] == Sost.огонь)
+                return true;
+            if (mobs.Count == 0) return true;
+            foreach (Mob mob in mobs)
+            {
+                if (myPoint == mob.MyNowPoint()) return true;
+            }
+            return false;
         }
     }
 }

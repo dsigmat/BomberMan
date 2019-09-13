@@ -10,18 +10,20 @@ using System.Windows.Forms;
 
 namespace BomberMan
 {
+    public delegate void deClear();
     public partial class FormGame : Form
     {
         MainBoard board;
         public FormGame()
         {
             InitializeComponent();
-            Init();
+            NewGame();
         }
 
-        private void Init()
+        private void NewGame()
         {
-            board = new MainBoard(panelGame);
+            board = new MainBoard(panelGame, StartClear);
+            timerGameOver.Enabled = true;
         }
 
         private void aboutTheGameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,26 +59,63 @@ by Konami Corporation.
 
         private void FormGame_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            if(timerGameOver.Enabled)
+                switch (e.KeyCode)
+                {
+                    case Keys.Left:
+                        board.MovePlayer(Arrows.left);
+                        break;
+                    case Keys.Right:
+                        board.MovePlayer(Arrows.right);
+                        break;
+                    case Keys.Up:
+                        board.MovePlayer(Arrows.up);
+                        break;
+                    case Keys.Down:
+                        board.MovePlayer(Arrows.down);
+                        break;
+                    case Keys.Space:
+                        board.PutBomb();
+                        break;
+                    default:
+                        break;
+                }
+        }
+
+        private void timerFireClear_Tick(object sender, EventArgs e)
+        {
+            board.ClearFire();
+            timerFireClear.Enabled = false;
+        }
+
+        private void StartClear()
+        {
+            timerFireClear.Enabled = true;
+        }
+
+        private void timerGameOver_Tick(object sender, EventArgs e)
+        {
+            if (board.GameOver())
             {
-                case Keys.Left:
-                    board.MovePlayer(Arrows.left);
-                    break;
-                case Keys.Right:
-                    board.MovePlayer(Arrows.right);
-                    break;
-                case Keys.Up:
-                    board.MovePlayer(Arrows.up);
-                    break;
-                case Keys.Down:
-                    board.MovePlayer(Arrows.down);
-                    break;
-                case Keys.Space:
-                    board.PutBomb();
-                    break;
-                default:
-                    break;
+                timerGameOver.Enabled = false;
+                DialogResult dr = MessageBox.Show("Хотите начать заново?", "Конец игре!",
+                                                    MessageBoxButtons.YesNo,
+                                                    MessageBoxIcon.Question);
+                if(dr == System.Windows.Forms.DialogResult.Yes)
+                {
+                    NewGame();
+                }
             }
+        }
+
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewGame();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

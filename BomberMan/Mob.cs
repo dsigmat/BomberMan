@@ -9,10 +9,10 @@ namespace BomberMan
         /// <summary>
         /// Уровни сложности:
         ///     1. Самый глупый - выбирает доступную точку и бежит к ней.
-        ///     2. Умный        - выбирает доступную точку и бежит к ней, если видит бомбу - убегает.
+        ///     2. Умный        - выбирает доступную точку и бежит к ней, если видит бомбу или огонь - убегает.
         ///     3. Самый умный  - бегает от точки к точке, если доступен человек - бежит к нему, если встретил бомбу - убегает.
         /// </summary>
-
+        int level = 0;
         public PictureBox mob { get; private set; }
         Timer timer;
         Point destinePlace;
@@ -25,16 +25,20 @@ namespace BomberMan
         Point[] path;
         int pathStep;
         static Random rand = new Random();
+        Player player;
 
-        public Mob(PictureBox picMob, PictureBox[,] _mapPic, Sost[,] _map)
+        public Mob(PictureBox picMob, PictureBox[,] _mapPic, Sost[,] _map, Player _player)
         {
             mob = picMob;
             map = _map;
+            player = _player;
             fmap = new int[map.GetLength(0), map.GetLength(1)];
             path = new Point[map.GetLength(0) * map.GetLength(1)];
+
             moving = new MovingClass(picMob, _mapPic, _map);
             mobPlace = moving.MyNowPoint();
             destinePlace = mobPlace;
+
             CreateTimer();
             timer.Enabled = true;
         }
@@ -63,24 +67,22 @@ namespace BomberMan
             int sx = 0;
             int sy = 0;
             if (mobPlace.X < newPlace.X)
-            {
                 sx = newPlace.X - mobPlace.X > step ? step : newPlace.X - mobPlace.X;
-            }
             else
-            {
                 sx = mobPlace.X - newPlace.X < step ? newPlace.X - mobPlace.X : -step;
-            }
 
             if (mobPlace.Y < newPlace.Y)
-            {
                 sy = newPlace.Y - mobPlace.Y > step ? step : newPlace.Y - mobPlace.Y;
-            }
             else
-            {
                 sy = mobPlace.Y - newPlace.Y < step ? newPlace.Y - mobPlace.Y : -step;
-            }
+
             moving.Move(sx, sy);
             mobPlace = moving.MyNowPoint();
+
+            if (level >= 2 && 
+                map[newPlace.X, newPlace.Y] == Sost.бомба ||
+                map[newPlace.X, newPlace.Y] == Sost.огонь)
+                GetNewPlace();
         }
 
         private bool FindPath()
@@ -149,6 +151,11 @@ namespace BomberMan
 
         private void GetNewPlace()
         {
+            if(level >= 3)
+            {
+                destinePlace = player.MyNowPoint();
+                if (FindPath()) return;
+            }
             int loop = 0;
             do
             {
@@ -156,9 +163,7 @@ namespace BomberMan
                 destinePlace.Y = rand.Next(1, map.GetLength(1) - 1);
             } while (!FindPath() && loop++ < 100);
             if (loop >= 100)
-            {
                 destinePlace = mobPlace;
-            }
         }
 
         public Point MyNowPoint()
